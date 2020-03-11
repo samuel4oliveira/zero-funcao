@@ -1,30 +1,55 @@
-def tratamento_de_entrada(fx):
-    for i in range(len(fx) - 1):
-        if fx[i].isdigit() and fx[i+1].isalpha():
-            fx = fx.replace(fx[i] + fx[i+1], fx[i] + '*' + fx[i+1])
-    fx = fx.replace('f(x)=', '')
-    fx = fx.replace('^', '**')
-    return fx
+def tratamento_de_entrada(f):
+    for i in range(len(f) - 1):
+        if f[i].isdigit() and f[i+1].isalpha():
+            f = f.replace(f[i] + f[i+1], f[i] + '*' + f[i+1])
+    f = f.replace('f(x)=', '')
+    f = f.replace('^', '**')
+    return f
 
-def calcula_y(fx, x, y):
-    fx = fx.replace('x', str(x))
-    fx = 'y = '+ fx
-    exec(fx)
+def calcula_y(f, x):
+    y = 0.0
+    f = f.replace('x', str(x))
+    y = eval(f)
     return y
 
-#entradas
-intervalo = (5.1, 5.7)
-fx = 'f(x)=x^2-6x+4'
-fx = tratamento_de_entrada(fx)
+def bisseccao(f, precisao, a, b):
+    listaX=[]
+    listFx=[]
+    if (b - a) < precisao:
+        p = a
+    else:
+        i = 1
+        p = (a + b) / 2
+        fp = calcula_y(f, p)
+        fa = calcula_y(f, a)
+        while b-a >= precisao:
+            p = (a + b) / 2
+            fp = calcula_y(f, p)
+            fa = calcula_y(f, a)
+            listaX.append(p)
+            listFx.append(fp)
+            if fa *fp > 0:
+                a = p
+            else:
+                b = p
+            i += 1
+        i -= 1         
+        print('<x>=', listaX)
+        print('<fx>=', listFx)
+        print('x=', p)
+        print('f(x)=', fp)
+        print('errx=', a-b)
+        print('iter=', i)
 
-#inicio bisseccao
-y = 0.0
-pontoMedio = (intervalo[0] + intervalo[1]) / 2
-y = calcula_y(fx, pontoMedio, y)
-if y == 0:
-    print('A raiz que zera a função é: ', pontoMedio)
-else:
-    y = calcula_y(fx, intervalo[0], y)
-    print(y)
-    y = calcula_y(fx, intervalo[1], y)
-    print(y)
+#entradas
+f = 'f(x)=x^2-3'
+precisao = 0.01
+intervalo = [1.0, 2.0]
+
+#tratamento entradas
+f = tratamento_de_entrada(f)
+a = intervalo[0]
+b = intervalo[1]
+
+#chamadas
+bisseccao(f, precisao, a, b)
