@@ -14,7 +14,7 @@ def calcula_y(f, x):
     f = f.replace('x', str(x))
     return eval(f)
 
-def bisseccao(f, tolerancia, a, b):
+def posicao_falsa(f, tolerancia, a, b):
     listaX=[]
     listFx=[]
     if (b - a) < tolerancia:
@@ -22,17 +22,19 @@ def bisseccao(f, tolerancia, a, b):
     else:
         i = 1
         while True:
-            p = (a + b) / 2
-            fp = calcula_y(f, p)
             fa = calcula_y(f, a)
+            fb = calcula_y(f, b)
+            p = (a*fb - b*fa) / (fb - fa)
+            fp = calcula_y(f, p)
             listaX.append(p)
             listFx.append(fp)
+            if ((fp ** 2) ** (1/2)) < tolerancia:
+                break
             if fa *fp > 0:
                 a = p
             else:
                 b = p
             if b-a <= tolerancia:
-                p = (a + b) / 2
                 break
             i += 1
         print('<x>=', listaX)
@@ -53,5 +55,4 @@ f = tratamento_de_funcao(f)
 a = intervalo[0]
 b = intervalo[1]
 
-#chamadas
-bisseccao(f, tolerancia, a, b)
+posicao_falsa(f, tolerancia, a, b)
