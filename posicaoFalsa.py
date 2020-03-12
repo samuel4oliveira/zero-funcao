@@ -7,7 +7,9 @@ def tratamento_de_funcao(f):
     return f
 
 def tratamento_de_tolerancia(precisao):
-    tolerancia = precisao.replace('^', '**')
+    precisao = precisao.replace('precision=', '')
+    print(precisao)
+    tolerancia = '10**-' + precisao
     return eval(tolerancia)
 
 def calcula_y(f, x):
@@ -46,7 +48,7 @@ def posicao_falsa(f, tolerancia, a, b):
 
 #entradas
 f = 'f(x)=x^3-9x+3'
-precisao = '5*10^-4'
+precisao = 'precision=4'
 intervalo = [0.0, 1.0]
 
 #tratamento entradas

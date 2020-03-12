@@ -7,7 +7,7 @@ def tratamento_de_funcao(f):
     return f
 
 def tratamento_de_tolerancia(precisao):
-    tolerancia = precisao.replace('^', '**')
+    tolerancia = '10**-' + precisao
     return eval(tolerancia)
 
 def calcula_y(f, x):
@@ -44,7 +44,7 @@ def bisseccao(f, tolerancia, a, b):
 
 #entradas
 f = 'f(x)=x^3-9x+3'
-precisao = '5*10^-4'
+precisao = '4'
 intervalo = [0.0, 1.0]
 
 #tratamento entradas
