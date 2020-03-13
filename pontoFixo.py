@@ -48,7 +48,7 @@ def ponto_fixo(f, precisao, intervalo):
                 break
             p0 = p1
             i += 1
-        print('Método da Bissecção:')
+        print('Método do Ponto Fixo:')
         print('<x>=', listaX)
         print('<fx>=', listFx)
         print('x=', xBarra)

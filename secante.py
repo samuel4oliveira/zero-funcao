@@ -43,14 +43,13 @@ def secante(f, precisao, intervalo):
             p0 = p1
             p1 = p2
             i += 1
-        print('Método de Newton Raphson:')
+        print('Método da Secante:')
         print('<x>=', listaX)
         print('<fx>=', listFx)
         print('x=', xBarra)
         print('f(x)=', fp2)
         print('errx=', p2-p1)
         print('iter=', i)
-        print()
             
     #tratamento entradas
     tolerancia = tratamento_de_tolerancia(precisao)
